@@ -1,5 +1,6 @@
 package demo.springboot.api.models;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import jakarta.persistence.Column;
@@ -15,6 +16,7 @@ public class Customer implements Serializable {
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private int id;

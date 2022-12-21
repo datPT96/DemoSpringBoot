@@ -24,8 +24,7 @@ public class CustomerController {
 
 	@GetMapping("/customer/all")
 	public List<Customer> getAllCustomer() {
-		List<Customer> listCustomer = customerService.getAllCustomer();
-		return listCustomer;
+		return customerService.getAllCustomer();
 	}
 
 	@GetMapping("/customer")
@@ -43,7 +42,7 @@ public class CustomerController {
 		return customerService.updateCustomer(id, customer);
 	}
 
-	@DeleteMapping("/customer")
+	@DeleteMapping("/customer/dell")
 	public boolean deleteCustomer(@RequestParam int id) {
 		return customerService.deleteCustomer(id);
 	}

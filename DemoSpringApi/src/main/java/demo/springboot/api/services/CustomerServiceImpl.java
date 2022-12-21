@@ -16,14 +16,12 @@ public class CustomerServiceImpl implements ICustomerService {
 
 	@Override
 	public List<Customer> getAllCustomer() {
-		List<Customer> list = customerRepository.findAll();
-		return list;
+		return customerRepository.findAll();
 	}
 
 	@Override
 	public Optional<Customer> getCustomerById(int id) {
-		Optional<Customer> customer = customerRepository.findById(id);
-		return customer;
+		return customerRepository.findById(id);
 	}
 
 	@Override
@@ -34,17 +32,20 @@ public class CustomerServiceImpl implements ICustomerService {
 	@Override
 	public Customer updateCustomer(int id, Customer customer) {
 		Optional<Customer> customerUpdate = customerRepository.findById(id);
-		customerUpdate.get().setFirstName(customer.getFirstName());
-		customerUpdate.get().setLastName(customer.getLastName());
-		customerUpdate.get().setEmail(customer.getEmail());
-		customerUpdate.get().setActive(customer.isActive());
-		return customerRepository.save(customerUpdate.get());
+		if(customerUpdate.isPresent()){
+			customerUpdate.get().setFirstName(customer.getFirstName());
+			customerUpdate.get().setLastName(customer.getLastName());
+			customerUpdate.get().setEmail(customer.getEmail());
+			customerUpdate.get().setActive(customer.isActive());
+			return customerRepository.save(customerUpdate.get());
+		}
+		return null;
 	}
 
 	@Override
 	public boolean deleteCustomer(int id) {
-		Optional<Customer> list = customerRepository.findById(id);
-		if (list != null) {
+		Optional<Customer> customer = customerRepository.findById(id);
+		if (customer.isPresent()) {
 			customerRepository.deleteById(id);
 			return true;
 		}
